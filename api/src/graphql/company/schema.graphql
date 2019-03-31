@@ -4,6 +4,13 @@ type Company {
   users: [User]
 }
 
+input CompanyInput {
+  id: Int
+  name: String
+  users: [UserInput]
+}
+
+
 input CompanyWhere {
   id: Int
 }

@@ -21,10 +21,10 @@ export const Mutation = {
     editProfile: rs(User, {
       before: (findOptions, { data }) => {
         console.log('$$$ before.data', data);
-        if(!data.id) {
-            throw 'user.id is required';
+        if(!data.email) {
+            throw 'user.email is required';
         }
-        findOptions.where = { id: data.id };
+        findOptions.where = { email: data.email };
         return findOptions;
       },
       after: async (user, { data }) => {

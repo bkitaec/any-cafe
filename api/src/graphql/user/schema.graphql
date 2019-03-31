@@ -1,17 +1,18 @@
 type User {
-  id: Int
+  id: Int @isUserOwner
   email: String
   firstName: String
   lastName: String
   company: Company
-  jwt: String @isAuthUser
+  jwt: String @isUserOwner
 }
 
 input UserInput {
+    id: Int
     email: String
-    password: String
     firstName: String
     lastName: String
+    company: [CompanyInput]
 }
 
 type Query {
@@ -21,5 +22,5 @@ type Query {
 
 type Mutation {
    createUser(data: UserInput): User
-   editProfile(data: UserInput): User @isAuthUser
+   editProfile(data: UserInput): User @isUserOwner
 }
