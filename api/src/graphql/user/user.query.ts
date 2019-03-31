@@ -1,6 +1,7 @@
 import { resolver } from 'graphql-sequelize';
-import { User } from '../../models';
 import to from 'await-to-js';
+
+import { User } from '../../models';
 
 export const Query = {
     getProfile: resolver(User, {

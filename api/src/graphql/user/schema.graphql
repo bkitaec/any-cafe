@@ -1,8 +1,7 @@
 type User {
   id: Int @isUserOwner
   email: String
-  firstName: String
-  lastName: String
+  name: String
   company: Company
   jwt: String @isUserOwner
 }
@@ -10,8 +9,7 @@ type User {
 input UserInput {
     id: Int
     email: String
-    firstName: String
-    lastName: String
+    name: String
     company: [CompanyInput]
 }
 
@@ -23,4 +21,5 @@ type Query {
 type Mutation {
    createUser(data: UserInput): User
    editProfile(data: UserInput): User @isUserOwner
+   authFacebook(accessToken: String!): User
 }
