@@ -22,11 +22,10 @@ export const Mutation = {
     }),
     editProfile: resolver(User, {
       before: (findOptions, { data }) => {
-        console.log('$$$ before.data', data);
-        if(!data.email) {
-            throw 'user.email is required';
+        if(!data.id) {
+            throw 'user.id is required';
         }
-        findOptions.where = { email: data.email };
+        findOptions.where = { id: data.id };
         return findOptions;
       },
       after: async (user, { data }) => {
@@ -39,34 +38,35 @@ export const Mutation = {
       }
     }),
     authFacebook: resolver(User, {
-        before: async (findOptions) => findOptions,
-        after: async (user, { accessToken }, { req, res }) => {
+        before: async (findOptions, _, { fullContext }) => {
+
+            return findOptions
+        },
+        after: async (user, { accessToken }, { fullContext: { req, res } }) => {
             req.body = {
               ...req.body,
               access_token: accessToken,
             };
-
-            let [err, { data, info }] = await to(authenticateFacebook(req, res));
+            let [err, facebookInfo] = await to(authenticateFacebook(req, res));
+            const { data = null, info = null } = facebookInfo || {};
 
             if (data) {
               [err, user] = await to(User.upsertFbUser(data));
             }
 
-            if (info || !user) {
-              console.log(info);
+            if (info) {
               switch (info.code) {
                 case 'ETIMEDOUT':
                   return (new Error('Failed to reach Facebook: Try Again'));
                 default:
                   return (new Error('something went wrong with Facebook OAuth'));
               }
-            } else if(err) {
-              console.log(err);
+            } else if(err || !user) {
               throw new Error(err);
             }
-
-            user.login = true;
-            return user;
+            return {
+              token: user.getToken(),
+            };
         }
     }),
 };

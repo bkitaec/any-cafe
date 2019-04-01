@@ -3,14 +3,19 @@ type User {
   email: String
   name: String
   company: Company
-  jwt: String @isUserOwner
+  token: String @isUserOwner
 }
 
 input UserInput {
     id: Int
     email: String
+    password: String
     name: String
     company: [CompanyInput]
+}
+
+type AuthToken {
+    token: String
 }
 
 type Query {
@@ -21,5 +26,5 @@ type Query {
 type Mutation {
    createUser(data: UserInput): User
    editProfile(data: UserInput): User @isUserOwner
-   authFacebook(accessToken: String!): User
+   authFacebook(accessToken: String!): AuthToken
 }

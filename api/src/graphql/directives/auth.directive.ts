@@ -7,20 +7,19 @@ export class isUserOwnerDirective extends SchemaDirectiveVisitor {
   visitFieldDefinition(field) {
     const { resolve = defaultFieldResolver } = field;//This is confusing javascript syntax here is a link that describes what is going on: https://javascript.info/destructuring-assignment
     field.resolve = async function (...args) {
-      const [user, { data }, { user: authUser }] = args;
+      const [user, { data }, { userAuth }] = args;
 
-      if (authUser && data && authUser.id === data.id) {
+      if (userAuth && data && userAuth.id === data.id) {
         const result = await resolve.apply(this, args);
         return result;
       }
 
-      if (user && authUser && authUser.id === user.dataValues.id) {
+      if (user && userAuth && userAuth.id === user.dataValues.id) {
           const result = await resolve.apply(this, args);
           return result;
       }
 
-      throw new Error('You must be the owner to update this information');
-
+      throw new Error('You must be the owner to get or update this information');
     };
   }
 }
@@ -29,12 +28,12 @@ export class IsAuthDirective extends SchemaDirectiveVisitor {
   public visitFieldDefinition(field) {
     const { resolve = defaultFieldResolver } = field;
     field.resolve = async function(...args) {
-      let [, {}, {user: userInfo}] = args;
-      if(!userInfo){
+      let [, {}, { userAuth }] = args;
+      if(!userAuth){
         throw new Error('User not authenticated');
       }
 
-      let [err, authUser] = await to(User.findOne({where: {id: userInfo.id}}));
+      let [err, authUser] = await to(User.findOne({where: {id: userAuth.id}}));
       if(!authUser){
          throw new Error('JWT token received, User not found, and not authenticated');
       }

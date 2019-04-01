@@ -27,7 +27,7 @@ export class User extends Model<User> {
   @BelongsTo(() => Company)
   company: Company;
 
-  jwt: string;
+  token: string;
   login: boolean;
 
   @Column
@@ -70,25 +70,19 @@ export class User extends Model<User> {
       return this;
   };
 
-  getJwt(){
+  getToken(){
       return 'Bearer ' + jsonwebtoken.sign({
           id: this.id,
       }, ENV.JWT_ENCRYPTION, { expiresIn: ENV.JWT_EXPIRATION });
   }
 
   static async upsertFbUser({ accessToken, refreshToken, profile }) {
-
       const user = await User.findOne({ where: { socialNetwork: `facebook_${profile.id}` } });
-
       if (!user) {
           const [err, newUser] = await to(User.create({
               name: profile.displayName || `${profile.familyName} ${profile.givenName}`,
               email: profile.emails[0].value,
               socialNetwork: `facebook_${profile.id}`,
-              // 'social.facebookProvider': {
-              //     id: profile.id,
-              //     token: accessToken,
-              // },
           }));
           return newUser;
       }
