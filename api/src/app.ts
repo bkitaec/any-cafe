@@ -30,12 +30,11 @@ const server = new ApolloServer({
     resolvers,
     schemaDirectives,
     playground: true,
-    context: ({ req }) => {
-        return {
-            [EXPECTED_OPTIONS_KEY]: createContext(sequelize),
-            user: (<any>req).user,
-        };
-    }
+    context: (context) => ({
+        [EXPECTED_OPTIONS_KEY]: createContext(sequelize),
+        userAuth: (<any>context.req).user,
+        fullContext: context,
+    }),
 });
 server.applyMiddleware({ app });
 
