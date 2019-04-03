@@ -1,6 +1,6 @@
-const passport = require('passport');
-const FacebookTokenStrategy = require('passport-facebook-token');
-const { Strategy: GoogleTokenStrategy } = require('passport-google-token');
+import passport from 'passport';
+import FacebookTokenStrategy from 'passport-facebook-token';
+import { Strategy as GoogleTokenStrategy } from 'passport-google-token';
 
 // FACEBOOK STRATEGY
 const FacebookTokenStrategyCallback = (accessToken, refreshToken, profile, done) => done(null, {
