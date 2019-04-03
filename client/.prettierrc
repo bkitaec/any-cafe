@@ -5,6 +5,6 @@
   "trailingComma": "es5",
   "noSemi": true,
   "bracketSpacing": true,
-  "jsxBracketSameLine": true,
+  "jsxBracketSameLine": false,
   "arrowParens": "always"
 }
