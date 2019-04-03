@@ -1,0 +1,28 @@
+{
+  "extends": ["plugin:@typescript-eslint/recommended", "prettier", "prettier/@typescript-eslint"],
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "globals": {
+    "__DEV__": true
+  },
+  "rules": {
+    "quotes": [ "warn", "single", { "allowTemplateLiterals": true }],
+    "indent": [ "warn", 4, { "SwitchCase": 1 } ],
+    "max-len": ["warn", 160, {
+      "ignoreComments": true,
+      "ignoreStrings": true,
+      "ignoreRegExpLiterals": true,
+      "ignoreTemplateLiterals": true,
+      "ignoreTrailingComments": true,
+      "ignoreUrls": true
+    }],
+    "no-console": "warn",
+    "prefer-const": "warn",
+    "semi": "warn"
+  }
+}
