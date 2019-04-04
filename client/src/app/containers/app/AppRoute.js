@@ -6,6 +6,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import Layout from '../template/Layout';
 import Main from '../main/Main';
 import Map from '../map/Map';
+// import MapLegacy from '../mapLegacy/MapLegacy';
 import SignIn from '../auth/SignIn';
 import PageNotFound from '../../components/error/PageNotFound';
 
