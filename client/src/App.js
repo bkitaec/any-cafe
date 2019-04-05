@@ -2,7 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { MuiThemeProvider } from '@mic3/platform-ui';
-import { Paper, withStyles, createMuiTheme } from '@mic3/platform-ui';
+import {
+    Paper,
+    withStyles,
+    createMuiTheme,
+    DarkTheme,
+} from '@mic3/platform-ui';
 
 import AppRoute from './app/containers/app/AppRoute';
 
@@ -34,7 +39,7 @@ const styles = () => ({
 });
 
 const App = ({ classes }) => (
-    <MuiThemeProvider theme={theme}>
+    <MuiThemeProvider theme={DarkTheme || theme}>
         <Paper className={classes.root}>
             <Router>
                 <Route path="/" component={AppRoute} />

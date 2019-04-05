@@ -6,7 +6,11 @@ import Navbar from './Navbar';
 
 const Layout = ({ children }) => {
     return (
-        <Grid container alignItems="baseline">
+        <Grid
+            container
+            alignItems="stretch"
+            direction="column"
+        >
             <Navbar />
             {children}
         </Grid>
