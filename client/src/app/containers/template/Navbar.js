@@ -8,17 +8,7 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 
-import {
-    Typography,
-    withStyles,
-    AppBar,
-    Toolbar,
-    IconButton,
-    InputBase,
-    Badge,
-    MenuItem,
-    Menu,
-} from '@mic3/platform-ui';
+import { Typography, withStyles, AppBar, Toolbar, IconButton, InputBase, Badge, MenuItem, Menu } from '@mic3/platform-ui';
 
 import useMenu from '../../hooks/useMenu';
 
@@ -92,13 +82,9 @@ const styles = (theme) => ({
     },
 });
 
-const Navbar = ({ classes }) => {
+const Navbar = ({ classes, toggleDrawer }) => {
     const [anchorEl, handleProfileMenuOpen, handleMenuClose] = useMenu();
-    const [
-        mobileAnchorEl,
-        handleMobileMenuOpen,
-        handleMobileMenuClose,
-    ] = useMenu();
+    const [mobileAnchorEl, handleMobileMenuOpen, handleMobileMenuClose] = useMenu();
 
     const handleClose = useCallback(() => {
         handleMenuClose();
@@ -158,19 +144,10 @@ const Navbar = ({ classes }) => {
         <div className={classes.root}>
             <AppBar position="static">
                 <Toolbar>
-                    <IconButton
-                        className={classes.menuButton}
-                        color="inherit"
-                        aria-label="Open drawer"
-                    >
+                    <IconButton onClick={toggleDrawer} className={classes.menuButton} color="inherit" aria-label="Open drawer">
                         <MenuIcon />
                     </IconButton>
-                    <Typography
-                        className={classes.title}
-                        variant="h6"
-                        color="inherit"
-                        noWrap
-                    >
+                    <Typography className={classes.title} variant="h6" color="inherit" noWrap>
                         Anycafe
                     </Typography>
                     <div className={classes.search}>
@@ -198,9 +175,7 @@ const Navbar = ({ classes }) => {
                             </Badge>
                         </IconButton>
                         <IconButton
-                            aria-owns={
-                                isMenuOpen ? 'material-appbar' : undefined
-                            }
+                            aria-owns={isMenuOpen ? 'material-appbar' : undefined}
                             aria-haspopup="true"
                             onClick={handleProfileMenuOpen}
                             color="inherit"
@@ -209,11 +184,7 @@ const Navbar = ({ classes }) => {
                         </IconButton>
                     </div>
                     <div className={classes.sectionMobile}>
-                        <IconButton
-                            aria-haspopup="true"
-                            onClick={handleMobileMenuOpen}
-                            color="inherit"
-                        >
+                        <IconButton aria-haspopup="true" onClick={handleMobileMenuOpen} color="inherit">
                             <MoreIcon />
                         </IconButton>
                     </div>
@@ -227,6 +198,7 @@ const Navbar = ({ classes }) => {
 
 Navbar.propTypes = {
     classes: PropTypes.object,
+    toggleDrawer: PropTypes.func,
 };
 
 export default memo(withStyles(styles)(Navbar));

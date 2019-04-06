@@ -39,7 +39,7 @@ const styles = () => ({
 });
 
 const App = ({ classes }) => (
-    <MuiThemeProvider theme={DarkTheme || theme}>
+    <MuiThemeProvider theme={theme}>
         <Paper className={classes.root}>
             <Router>
                 <Route path="/" component={AppRoute} />
