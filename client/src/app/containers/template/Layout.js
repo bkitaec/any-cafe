@@ -1,39 +1,29 @@
-import React, { memo } from 'react';
+import React, { memo, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
+import { Grid, Drawer, MenuItem, AppBar } from '@mic3/platform-ui';
 
-import { Typography, Grid, Paper, withStyles } from '@mic3/platform-ui';
+import Navbar from './Navbar';
 
-const styles = (theme) => ({
-    root: { flexGrow: 1 },
-    paper: { paddingp: theme.spacing.unit * 2 },
-});
-
-const Layout = ({ classes }) => {
+const Layout = ({ children }) => {
+    const [isOpenDrawer, setDrawer] = useState(false);
+    const toggleDrawer = useCallback(() => {
+        setDrawer(!isOpenDrawer);
+    }, [isOpenDrawer]);
     return (
-        <Grid
-            container
-            direction="column"
-            justify="center"
-            alignItems="center"
-            spacing={24}
-            className={classes.root}
-        >
-            <Grid item spacing={16}>
-                <Paper elevation={1} className={classes.paper}>
-                    <Typography variant="h1">Anycafe</Typography>
-                </Paper>
-            </Grid>
-            <Grid item>
-                <Paper>
-                    <Typography variant="h3">comming soon...</Typography>
-                </Paper>
-            </Grid>
+        <Grid container alignItems="stretch" direction="column">
+            <Navbar toggleDrawer={toggleDrawer} />
+            <Drawer open={isOpenDrawer} onClose={toggleDrawer}>
+                <MenuItem>This is nice MENU item</MenuItem>
+                <MenuItem>Menu Item 2</MenuItem>
+            </Drawer>
+
+            {children}
         </Grid>
     );
 };
 
 Layout.propTypes = {
-    classes: PropTypes.object,
+    children: PropTypes.node,
 };
 
-export default memo(withStyles(styles)(Layout));
+export default memo(Layout);

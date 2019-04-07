@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "ts-node ./src/app.ts",
     "start:watch": "nodemon --exec 'ts-node' ./src/app.ts",
+    "start:debug": "node --inspect --require ts-node/register ./src/app.ts",
     "db:migrate": "node_modules/.bin/sequelize db:migrate",
     "build": "tsc",
     "lint": "eslint --max-warnings=0 src"
