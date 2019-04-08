@@ -41,4 +41,4 @@ const authenticateGoogle = (req, res) => new Promise((resolve, reject) => {
     })(req, res);
 });
 
-module.exports = { authenticateFacebook, authenticateGoogle };
+export { authenticateFacebook, authenticateGoogle };

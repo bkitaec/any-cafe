@@ -68,11 +68,11 @@ const loadTableData = (startActionType, endActionType, graphQlQuery, countMax) =
             },
             fetchPolicy: 'no-cache',
         })
-        .then((response: Object) => {
+        .then((response) => {
             const { count, records } = Immutable(get(response, 'data') || {});
             if (!Number.isInteger(count) || !Array.isArray(records)) {
                 console.warn(`The action "${endActionType}" is not returning the correct data.`, response); // eslint-disable-line no-console
-                throw new Error(`The service\'s response is not well formed.`);
+                throw new Error(`The service's response is not well formed.`);
             }
             dispatch({
                 type: endActionType,
