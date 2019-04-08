@@ -1,12 +1,12 @@
 import * as express  from 'express';
 import * as jwt from 'express-jwt';
 import { ApolloServer } from 'apollo-server-express';
-import { sequelize, User } from './models';
-import { ENV } from './config';
-
-import { resolver as resolvers, schema, schemaDirectives } from './graphql';
 import { createContext, EXPECTED_OPTIONS_KEY } from 'dataloader-sequelize';
 import to from 'await-to-js';
+
+import { sequelize, User } from './models';
+import { ENV } from './config';
+import { resolver as resolvers, schema, schemaDirectives } from './graphql';
 
 const app = express();
 

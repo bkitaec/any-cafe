@@ -1,6 +1,5 @@
-
-import passport from 'passport';
-import FacebookTokenStrategy from 'passport-facebook-token';
+import * as passport from 'passport';
+import * as FacebookTokenStrategy from 'passport-facebook-token';
 import { Strategy as GoogleTokenStrategy } from 'passport-google-token';
 
 // FACEBOOK STRATEGY
