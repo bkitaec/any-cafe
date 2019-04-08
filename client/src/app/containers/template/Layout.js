@@ -1,6 +1,6 @@
 import React, { memo, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Drawer, MenuItem, AppBar } from '@mic3/platform-ui';
+import { Grid, Drawer, MenuItem } from '@mic3/platform-ui';
 
 import Navbar from './Navbar';
 

@@ -2,8 +2,6 @@ import React, { PureComponent } from 'react';
 import GoogleMapReact from 'google-map-react';
 import MarkerClusterer from '@google/markerclusterer';
 
-import { Typography } from '@mic3/platform-ui';
-
 import VerticalGrid from 'app/components/organisms/restaurants/VerticalGrid';
 import Grid from 'app/components/atoms/Grid';
 import BookTable from 'app/containers/restaurants/BookTable';
@@ -17,7 +15,7 @@ import Cluster4 from './icons/cluster4.png';
 
 const GOOGLE_API_KEY = 'AIzaSyCl4Ji7FJ2Ms_1zuYqWJOubtxpBVIp9EQ4';
 
-const createMapOptions = (maps) => {
+const createMapOptions = (/* maps */) => {
     // next props are exposed at maps
     // "Animation", "ControlPosition", "MapTypeControlStyle", "MapTypeId",
     // "NavigationControlStyle", "ScaleControlStyle", "StrokePosition", "SymbolPath", "ZoomControlStyle",
@@ -92,7 +90,6 @@ class Map extends PureComponent {
     //     }
     // };
 
-
     // marker.setAnimation(google.maps.Animation.BOUNCE);
     //         })
     //         .on('mouseleave', function() {
@@ -129,8 +126,7 @@ class Map extends PureComponent {
         const {
             type,
             name: title,
-            phone,
-            location: { full_address: address, country, state, city, district },
+            location: { country, state, city, district },
         } = markerinfo;
         const categories = [country.slug, state.slug, city.slug, district.slug, type.slug];
 
@@ -183,10 +179,9 @@ class Map extends PureComponent {
         }
     };
 
-    toggleBooking = () => this.setState({ open: !this.state.open })
+    toggleBooking = () => this.setState({ open: !this.state.open });
 
     render() {
-        console.log('$$$ loaded', this);
         return [
             <Grid key={0} item grow={1}>
                 <GoogleMapReact

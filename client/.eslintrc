@@ -36,6 +36,7 @@
 
   },
   "rules": {
+    "no-unused-vars": "warn",
     "quotes": [ "warn", "single", { "allowTemplateLiterals": true }],
     "indent": [ "warn", 4, { "SwitchCase": 1 } ],
     "max-len": ["warn", 160, {

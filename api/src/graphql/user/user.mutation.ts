@@ -2,7 +2,7 @@ import to from 'await-to-js';
 import { resolver } from 'graphql-sequelize';
 
 import { User } from '../../models';
-import { authenticateFacebook } from '../../auth/passport';
+import { authenticateFacebook } from '../../auth/auth';
 
 export const Mutation = {
     createUser: resolver(User, {

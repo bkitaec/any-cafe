@@ -17,6 +17,7 @@ import {
 } from '@mic3/platform-ui';
 
 import Centered from 'app/components/molecules/wrappers/Centered';
+import { useOnPlainForm } from 'app/hooks/useOnForm';
 
 const styles = (theme) => ({
     paper: {
@@ -24,8 +25,7 @@ const styles = (theme) => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit *
-            3}px ${theme.spacing.unit * 3}px`,
+        padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
     },
     avatar: {
         margin: theme.spacing.unit,
@@ -42,6 +42,10 @@ const styles = (theme) => ({
 
 const SignIn = (props) => {
     const { classes } = props;
+    const [form, onChange] = useOnPlainForm({
+        email: '',
+        password: '',
+    });
     return (
         <Centered>
             <Grid item>
@@ -55,38 +59,15 @@ const SignIn = (props) => {
                     </Typography>
                     <form className={classes.form}>
                         <FormControl margin="normal" required fullWidth>
-                            <InputLabel htmlFor="email">
-                                Email Address
-                            </InputLabel>
-                            <Input
-                                id="email"
-                                name="email"
-                                autoComplete="email"
-                                autoFocus
-                            />
+                            <InputLabel htmlFor="email">Email Address</InputLabel>
+                            <Input id="email" name="email" autoComplete="email" autoFocus />
                         </FormControl>
                         <FormControl margin="normal" required fullWidth>
                             <InputLabel htmlFor="password">Password</InputLabel>
-                            <Input
-                                name="password"
-                                type="password"
-                                id="password"
-                                autoComplete="current-password"
-                            />
+                            <Input name="password" type="password" id="password" autoComplete="current-password" />
                         </FormControl>
-                        <FormControlLabel
-                            control={
-                                <Checkbox value="remember" color="primary" />
-                            }
-                            label="Remember me"
-                        />
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            color="primary"
-                            className={classes.submit}
-                        >
+                        <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
+                        <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
                             Sign in
                         </Button>
                     </form>

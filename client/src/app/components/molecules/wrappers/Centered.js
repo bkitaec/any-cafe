@@ -9,14 +9,7 @@ const styles = () => ({
 
 const Centered = ({ classes, children }) => {
     return (
-        <Grid
-            container
-            direction="column"
-            justify="center"
-            alignItems="center"
-            spacing={24}
-            className={classes.root}
-        >
+        <Grid container direction="column" justify="center" alignItems="center" spacing={24} className={classes.root}>
             {children}
         </Grid>
     );
