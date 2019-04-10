@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import 'index.css';
+
+import 'app/assets/scss/material-kit-react.scss?v=1.4.0';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

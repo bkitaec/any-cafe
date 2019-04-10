@@ -1,6 +1,6 @@
-import React, { memo, useState, useCallback } from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Drawer, MenuItem } from '@mic3/platform-ui';
+import { Grid } from '@mic3/platform-ui';
 import styled from 'styled-components';
 
 import Navbar from './Navbar';
@@ -26,17 +26,9 @@ const Content = styled(Grid)`
 `;
 
 const Layout = ({ children }) => {
-    const [isOpenDrawer, setDrawer] = useState(false);
-    const toggleDrawer = useCallback(() => {
-        setDrawer(!isOpenDrawer);
-    }, [isOpenDrawer]);
     return (
         <Grid container alignItems="stretch" direction="column" wrap="nowrap">
-            <Navbar toggleDrawer={toggleDrawer} />
-            <Drawer open={isOpenDrawer} onClose={toggleDrawer}>
-                <MenuItem>This is nice MENU item</MenuItem>
-                <MenuItem>Menu Item 2</MenuItem>
-            </Drawer>
+            <Navbar />
             <Content container>{children}</Content>
         </Grid>
     );

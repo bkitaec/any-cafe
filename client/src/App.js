@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 
 import AppRoute from 'app/containers/app/AppRoute';
 import store from 'store/Store';
+import history from 'store/History';
 import { client } from 'graphql/client';
 
 const theme = createMuiTheme({
@@ -42,7 +43,7 @@ const App = ({ classes }) => (
         <Paper className={classes.root}>
             <ApolloProvider client={client}>
                 <Provider store={store}>
-                    <Router>
+                    <Router history={history}>
                         <Route path="/" component={AppRoute} />
                     </Router>
                 </Provider>

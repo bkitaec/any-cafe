@@ -2,9 +2,6 @@ import React, { PureComponent } from 'react';
 import GoogleMapReact from 'google-map-react';
 import MarkerClusterer from '@google/markerclusterer';
 
-import VerticalGrid from 'app/components/organisms/restaurants/VerticalGrid';
-import Grid from 'app/components/atoms/Grid';
-import BookTable from 'app/containers/restaurants/BookTable';
 import stores from './stores.json';
 import mapStyles from './styles.json';
 import Pin from './icons/pin.png';
@@ -15,64 +12,6 @@ import Cluster4 from './icons/cluster4.png';
 
 const GOOGLE_API_KEY = 'AIzaSyCl4Ji7FJ2Ms_1zuYqWJOubtxpBVIp9EQ4';
 
-const createMapOptions = (/* maps */) => {
-    // next props are exposed at maps
-    // "Animation", "ControlPosition", "MapTypeControlStyle", "MapTypeId",
-    // "NavigationControlStyle", "ScaleControlStyle", "StrokePosition", "SymbolPath", "ZoomControlStyle",
-    // "DirectionsStatus", "DirectionsTravelMode", "DirectionsUnitSystem", "DistanceMatrixStatus",
-    // "DistanceMatrixElementStatus", "ElevationStatus", "GeocoderLocationType", "GeocoderStatus", "KmlLayerStatus",
-    // "MaxZoomStatus", "StreetViewStatus", "TransitMode", "TransitRoutePreference", "TravelMode", "UnitSystem"
-    return {
-        disableDefaultUI: true,
-        styles: mapStyles,
-        // zoomControlOptions: {
-        //     position: maps.ControlPosition.RIGHT_CENTER,
-        //     style: maps.ZoomControlStyle.SMALL,
-        // },
-        // mapTypeControlOptions: {
-        //     position: maps.ControlPosition.TOP_RIGHT,
-        // },
-        // mapTypeControl: true,
-    };
-};
-
-const optionsCluster = {
-    maxZoom: 10, // máximo zoom exibido cluster
-    styles: [
-        {
-            url: Cluster4,
-            height: 30,
-            width: 30,
-            anchor: [3, 0],
-            textColor: '#3b2513',
-            textSize: 14,
-        },
-        {
-            url: Cluster4,
-            height: 40,
-            width: 40,
-            anchor: [6, 0],
-            textColor: '#3b2513',
-            textSize: 11,
-        },
-        {
-            url: Cluster4,
-            width: 50,
-            height: 50,
-            anchor: [8, 0],
-            textColor: '#3b2513',
-            textSize: 12,
-        },
-    ],
-};
-
-const Marker = (props) => {
-    const style = props.$hover // eslint-disable-line
-        ? { background: 'red' }
-        : { background: 'green' };
-    return <div style={style}>{`Hello marker`}</div>;
-};
-
 class Map extends PureComponent {
     initiated = false;
     map = null;
@@ -82,38 +21,6 @@ class Map extends PureComponent {
     state = {
         open: false,
     };
-    // showMarkersByArea = () => {
-    //     this.bounds = this.map.getBounds();
-    //
-    //     for (var i = 0; i < this.state.markers.length; i++) {
-    //         if (this.bounds.contains(markers[i].position)) Markers.push(markers[i].title);
-    //     }
-    // };
-
-    // marker.setAnimation(google.maps.Animation.BOUNCE);
-    //         })
-    //         .on('mouseleave', function() {
-    //           var marker = markerObjects[markerIndex];
-    //           if (marker.getAnimation() != null) {
-    //             marker.setAnimation(null);
-    //           }
-    //         });
-
-    // filter() {
-    //     const bounds = new this.maps.LatLngBounds();
-    //     for (i = 0; i < markers.length; i++) {
-    //         var mark = markers[i];
-    //         if (objectsMatch(mark.category, countryValSel) || countryValSel.length === 0) {
-    //             mark.setVisible(true);
-    //             mc.setIgnoreHidden(true);
-    //             bounds.extend(mark.getPosition());
-    //         } else {
-    //             mc.setIgnoreHidden(true);
-    //             mark.setVisible(false);
-    //         }
-    //     }
-    //     this.map.fitBounds(bounds);
-    // }
 
     initMap = () => {
         const markers = stores.map((store) => this.addMarker(store));
@@ -182,24 +89,56 @@ class Map extends PureComponent {
     toggleBooking = () => this.setState({ open: !this.state.open });
 
     render() {
-        return [
-            <Grid key={0} item grow={1}>
-                <GoogleMapReact
-                    bootstrapURLKeys={{
-                        key: GOOGLE_API_KEY,
-                    }}
-                    defaultCenter={[59.955413, 30.337844]}
-                    defaultZoom={10}
-                    yesIWantToUseGoogleMapApiInternals
-                    onGoogleApiLoaded={this.onGoogleApiLoaded}
-                    options={createMapOptions}
-                />
-                <Marker lat={59.955413} lng={30.337844} />
-            </Grid>,
-            <VerticalGrid key={2} />,
-            <BookTable key={1} open={this.state.open} toggle={this.toggleBooking} />,
-        ];
+        return (
+            <GoogleMapReact
+                bootstrapURLKeys={{
+                    key: GOOGLE_API_KEY,
+                }}
+                defaultCenter={[59.955413, 30.337844]}
+                defaultZoom={10}
+                yesIWantToUseGoogleMapApiInternals
+                onGoogleApiLoaded={this.onGoogleApiLoaded}
+                options={createMapOptions}
+            />
+        );
     }
 }
+
+const createMapOptions = (/* maps */) => {
+    return {
+        disableDefaultUI: true,
+        styles: mapStyles,
+    };
+};
+
+const optionsCluster = {
+    maxZoom: 10, // máximo zoom exibido cluster
+    styles: [
+        {
+            url: Cluster4,
+            height: 30,
+            width: 30,
+            anchor: [3, 0],
+            textColor: '#3b2513',
+            textSize: 14,
+        },
+        {
+            url: Cluster4,
+            height: 40,
+            width: 40,
+            anchor: [6, 0],
+            textColor: '#3b2513',
+            textSize: 11,
+        },
+        {
+            url: Cluster4,
+            width: 50,
+            height: 50,
+            anchor: [8, 0],
+            textColor: '#3b2513',
+            textSize: 12,
+        },
+    ],
+};
 
 export default Map;

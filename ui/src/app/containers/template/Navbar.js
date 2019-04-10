@@ -6,9 +6,9 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import Header from 'app/components/Header/Header.jsx';
 import Button from 'app/components/CustomButtons/Button.jsx';
-
+import Logo from 'logo1.png';
 import navbarsStyle from 'app/assets/jss/material-kit-react/views/componentsSections/navbarsStyle.jsx';
-
+console.log('$$$ [navbarsStyle]', navbarsStyle);
 const dashboardRoutes = [];
 
 class SectionNavbars extends React.Component {
@@ -16,27 +16,27 @@ class SectionNavbars extends React.Component {
         const { classes, ...restProps } = this.props;
         return (
             <Header
-                brand="Anycafe"
+                brand={<img className={classes.logo} src={Logo} alt="Anycafe" />}
                 routes={dashboardRoutes}
                 rightLinks={
-                    <List className={classes.list}>
+                    <List className={`${classes.list} ${classes.navbarList}`}>
                         <ListItem className={classes.listItem}>
                             <Button href="#pablo" className={classes.navLink} onClick={(e) => e.preventDefault()} color="transparent">
-                                Discover
+                                Search
                             </Button>
                         </ListItem>
                         <ListItem className={classes.listItem}>
-                            <Button href="#pablo" className={classes.navLink} onClick={(e) => e.preventDefault()} color="transparent">
+                            <Button size="sm" href="#pablo" className={classes.navLink} onClick={(e) => e.preventDefault()} color="transparent">
                                 Wishlist
                             </Button>
                         </ListItem>
                         <ListItem className={classes.listItem}>
                             <Button
-                                href="#pablo"
+                                href={'/signin'}
                                 className={classes.registerNavLink}
                                 onClick={(e) => e.preventDefault()}
-                                color="rose"
-                                round
+                                color="danger"
+                                size="sm"
                             >
                                 Register
                             </Button>
@@ -54,4 +54,11 @@ class SectionNavbars extends React.Component {
     }
 }
 
-export default withStyles(navbarsStyle)(SectionNavbars);
+const styles = (theme) => ({
+    ...navbarsStyle(theme),
+    logo: {
+        height: '50px',
+    },
+});
+
+export default withStyles(styles)(SectionNavbars);
