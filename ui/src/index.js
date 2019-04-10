@@ -7,7 +7,8 @@ import 'app/assets/scss/material-kit-react.scss?v=1.4.0';
 
 // pages for this product
 import Components from 'app/views/Components/Components.jsx';
-import LandingPage from 'app/views/LandingPage/LandingPage.jsx';
+import Main from 'app/views/Main/Main.jsx';
+import SearchRestaurants from 'app/views/SearchRestaurants/SearchRestaurants.jsx';
 import ProfilePage from 'app/views/ProfilePage/ProfilePage.jsx';
 import LoginPage from 'app/views/LoginPage/LoginPage.jsx';
 
@@ -19,7 +20,8 @@ ReactDOM.render(
             <Route path="/landing-page" component={Components} />
             <Route path="/profile" component={ProfilePage} />
             <Route path="/signin" component={LoginPage} />
-            <Route path="/" component={LandingPage} />
+            <Route path="/search" component={SearchRestaurants} />
+            <Route path="/" component={Main} />
         </Switch>
     </Router>,
     document.getElementById('root')

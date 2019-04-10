@@ -12,43 +12,6 @@ import Cluster4 from './icons/cluster4.png';
 
 const GOOGLE_API_KEY = 'AIzaSyCl4Ji7FJ2Ms_1zuYqWJOubtxpBVIp9EQ4';
 
-const createMapOptions = (/* maps */) => {
-    return {
-        disableDefaultUI: true,
-        styles: mapStyles,
-    };
-};
-
-const optionsCluster = {
-    maxZoom: 10, // máximo zoom exibido cluster
-    styles: [
-        {
-            url: Cluster4,
-            height: 30,
-            width: 30,
-            anchor: [3, 0],
-            textColor: '#3b2513',
-            textSize: 14,
-        },
-        {
-            url: Cluster4,
-            height: 40,
-            width: 40,
-            anchor: [6, 0],
-            textColor: '#3b2513',
-            textSize: 11,
-        },
-        {
-            url: Cluster4,
-            width: 50,
-            height: 50,
-            anchor: [8, 0],
-            textColor: '#3b2513',
-            textSize: 12,
-        },
-    ],
-};
-
 class Map extends PureComponent {
     initiated = false;
     map = null;
@@ -127,20 +90,55 @@ class Map extends PureComponent {
 
     render() {
         return (
-            <div style={{ height: '100vh', width: '100vh', flexGrow: 1, zIndex: 12 }}>
-                <GoogleMapReact
-                    bootstrapURLKeys={{
-                        key: GOOGLE_API_KEY,
-                    }}
-                    defaultCenter={[59.955413, 30.337844]}
-                    defaultZoom={10}
-                    yesIWantToUseGoogleMapApiInternals
-                    onGoogleApiLoaded={this.onGoogleApiLoaded}
-                    options={createMapOptions}
-                />
-            </div>
+            <GoogleMapReact
+                bootstrapURLKeys={{
+                    key: GOOGLE_API_KEY,
+                }}
+                defaultCenter={[59.955413, 30.337844]}
+                defaultZoom={10}
+                yesIWantToUseGoogleMapApiInternals
+                onGoogleApiLoaded={this.onGoogleApiLoaded}
+                options={createMapOptions}
+            />
         );
     }
 }
+
+const createMapOptions = (/* maps */) => {
+    return {
+        disableDefaultUI: true,
+        styles: mapStyles,
+    };
+};
+
+const optionsCluster = {
+    maxZoom: 10, // máximo zoom exibido cluster
+    styles: [
+        {
+            url: Cluster4,
+            height: 30,
+            width: 30,
+            anchor: [3, 0],
+            textColor: '#3b2513',
+            textSize: 14,
+        },
+        {
+            url: Cluster4,
+            height: 40,
+            width: 40,
+            anchor: [6, 0],
+            textColor: '#3b2513',
+            textSize: 11,
+        },
+        {
+            url: Cluster4,
+            width: 50,
+            height: 50,
+            anchor: [8, 0],
+            textColor: '#3b2513',
+            textSize: 12,
+        },
+    ],
+};
 
 export default Map;
