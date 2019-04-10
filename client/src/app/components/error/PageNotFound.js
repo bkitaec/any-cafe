@@ -16,14 +16,7 @@ const styles = () => ({
 
 const PageNotFound = ({ classes }) => {
     return (
-        <Grid
-            container
-            direction="column"
-            justify="center"
-            alignItems="center"
-            spacing={24}
-            className={classes.root}
-        >
+        <Grid container direction="column" justify="center" alignItems="center" spacing={24} className={classes.root}>
             <Grid item className={classes.text}>
                 <Paper className={classes.paper}>
                     <Typography variant="h1">UFO is here</Typography>

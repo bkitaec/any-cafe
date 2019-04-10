@@ -2,14 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { MuiThemeProvider } from '@mic3/platform-ui';
-import {
-    Paper,
-    withStyles,
-    createMuiTheme,
-    DarkTheme,
-} from '@mic3/platform-ui';
+import { Paper, withStyles, createMuiTheme } from '@mic3/platform-ui';
+import { ApolloProvider } from 'react-apollo';
+import { Provider } from 'react-redux';
 
-import AppRoute from './app/containers/app/AppRoute';
+import AppRoute from 'app/containers/app/AppRoute';
+import store from 'store/Store';
+import { client } from 'graphql/client';
 
 const theme = createMuiTheme({
     palette: {
@@ -41,9 +40,13 @@ const styles = () => ({
 const App = ({ classes }) => (
     <MuiThemeProvider theme={theme}>
         <Paper className={classes.root}>
-            <Router>
-                <Route path="/" component={AppRoute} />
-            </Router>
+            <ApolloProvider client={client}>
+                <Provider store={store}>
+                    <Router>
+                        <Route path="/" component={AppRoute} />
+                    </Router>
+                </Provider>
+            </ApolloProvider>
         </Paper>
     </MuiThemeProvider>
 );

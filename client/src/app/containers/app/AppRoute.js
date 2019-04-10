@@ -1,14 +1,14 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 // import PropTypes from 'prop-types';
 
-import Layout from '../template/Layout';
-import Main from '../main/Main';
-import Map from '../map/Map';
-// import MapLegacy from '../mapLegacy/MapLegacy';
-import SignIn from '../auth/SignIn';
-import PageNotFound from '../../components/error/PageNotFound';
+import Layout from 'app/containers/template/Layout';
+import Main from 'app/containers/main/Main';
+import Map from 'app/containers/map/Map';
+import SignIn from 'app/containers/auth/SignIn';
+import SignUp from 'app/containers/auth/SignUp';
+import PageNotFound from 'app/components/error/PageNotFound';
 
 /**
  * AppRoute Container
@@ -16,15 +16,18 @@ import PageNotFound from '../../components/error/PageNotFound';
 const AppRoute = ({ location }) => {
     const badUrl = location.pathname.split('?')[0].includes('=');
     return (
+        <Router>
         <Layout>
             <Switch>
                 {badUrl && <Redirect to="/" />}
                 <Route exact path="/" component={Main} />
                 <Route path="/map" component={Map} />
                 <Route path="/signin" component={SignIn} />
+                <Route path="/signup" component={SignUp} />
                 <Route component={PageNotFound} />
             </Switch>
         </Layout>
+    </Router>
     );
 };
 

@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles, MdiIcon, GridList, GridListTile, GridListTileBar, IconButton, StarBorderIcon } from '@mic3/platform-ui';
+import { withStyles, MdiIcon, GridList, GridListTile, GridListTileBar, IconButton } from '@mic3/platform-ui';
 
-const imagePath = 'https://image.shutterstock.com/z/stock-photo-close-up-of-a-cup-with-hot-cappuccino-in-a-cosy-cafe-with-foam-design-on-it-of-heart-1228620277.jpg';
+const imagePath =
+    'https://image.shutterstock.com/z/stock-photo-close-up-of-a-cup-with-hot-cappuccino-in-a-cosy-cafe-with-foam-design-on-it-of-heart-1228620277.jpg';
 const tileData = [
     {
         img: imagePath,

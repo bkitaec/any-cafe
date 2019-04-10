@@ -2,14 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
     withStyles,
-    Button,
     Dialog,
-    ListItemText,
-    ListItem,
-    List,
-    Divider,
-    AppBar,
-    Toolbar,
     IconButton,
     Typography,
     MdiIcon,
@@ -20,8 +13,6 @@ import {
     Avatar,
     CardContent,
     CardActions,
-    Collapse,
-    TextField,
     withMobileDialog,
 } from '@mic3/platform-ui';
 

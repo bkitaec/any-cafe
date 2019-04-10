@@ -7,7 +7,7 @@ type Company {
 input CompanyInput {
   id: Int
   name: String
-  users: [UserInput]
+  users: [UserUpdateInput]
 }
 
 
