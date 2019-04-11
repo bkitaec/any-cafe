@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 // import PropTypes from 'prop-types';
@@ -32,4 +32,4 @@ AppRoute.propTypes = {
     location: PropTypes.object,
 };
 
-export default memo(AppRoute);
+export default AppRoute;

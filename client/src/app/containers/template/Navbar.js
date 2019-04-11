@@ -8,6 +8,7 @@ import styled from 'styled-components';
 
 import { Drawer, Typography, withStyles, AppBar, Toolbar, IconButton, InputBase, MenuItem, Menu } from '@mic3/platform-ui';
 
+import Link from 'app/components/atoms/Link';
 import Button from 'app/components/atoms/Button';
 import useMenu from 'app/hooks/useMenu';
 import Logo from 'app/assets/img/logomini.png';
@@ -88,7 +89,9 @@ const Navbar = ({ classes }) => {
                         <MenuIcon />
                     </IconButton>
                     <Typography className={classes.title} variant="h6" color="inherit" noWrap>
-                        <img className={classes.logo} src={Logo} alt="Anycafe" />
+                        <Link to="/">
+                            <img className={classes.logo} src={Logo} alt="Anycafe" />
+                        </Link>
                     </Typography>
                     <div className={`${classes.search} ${classes.grow}`}>
                         <InputBase
