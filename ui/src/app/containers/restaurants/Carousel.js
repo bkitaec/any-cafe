@@ -47,7 +47,7 @@ class Carousel extends PureComponent {
         };
         return (
             <SlickCarousel className={classes.container} {...settings}>
-                {restaraunts.map((restaurant, index) => (
+                {restaurantss.map((restaurant, index) => (
                     <GridContainer justify="center" key={index}>
                         <RestaurantCard restaurant={restaurant} index={index} classes={classes} />
                     </GridContainer>
@@ -56,7 +56,7 @@ class Carousel extends PureComponent {
         );
     }
 }
-const restaraunts = [
+const restaurantss = [
     { name: 'Restaurant #1', image: image1, desc: 'Some description soon...' },
     { name: 'Restaurant #2', image: image2, desc: 'Some description soon...' },
     { name: 'Restaurant #3', image: image3, desc: 'Some description soon...' },

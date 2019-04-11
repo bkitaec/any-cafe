@@ -20,7 +20,11 @@ const RestaurantCard = ({ classes, restaurant }) => (
                 <img className={`${classes.skewChild} ${classes.image}`} src={restaurant.image} alt={restaurant.name} />
             </div>
             <h4 className={classes.cardTitle}>{restaurant.name}</h4>
-            <p>{restaurant.phone}</p>
+            <b>Phone:</b>
+            <span>
+                {' +'}
+                {restaurant.phone}
+            </span>
         </CardBody>
         <CardFooter className={`${classes.cardFooter} ${classes.skewChild} ${classes.cardBody}`}>
             <div className={classes.flex}>
@@ -33,8 +37,14 @@ const RestaurantCard = ({ classes, restaurant }) => (
 );
 
 class Carousel extends PureComponent {
+    sliderRef = React.createRef();
+
+    componentDidiUpdate(prevProps) {
+            const { }
+    }
+
     render() {
-        const { classes, restaraunts } = this.props;
+        const { classes, restaurants, activeRestaurant } = this.props;
         const settings = {
             infinite: true,
             speed: 500,
@@ -42,8 +52,8 @@ class Carousel extends PureComponent {
             slidesToScroll: 1,
         };
         return (
-            <SlickCarousel className={classes.container} {...settings}>
-                {restaraunts.map((restaurant, index) => (
+            <SlickCarousel ref={this.sliderRef} className={classes.container} {...settings}>
+                {restaurants.map((restaurant, index) => (
                     <GridContainer justify="center" key={index}>
                         <RestaurantCard restaurant={restaurant} index={index} classes={classes} />
                     </GridContainer>

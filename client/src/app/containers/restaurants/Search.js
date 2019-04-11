@@ -5,23 +5,24 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import Map from 'app/containers/map/Map';
 import RestaurantsCarousel from 'app/containers/restaurants/Carousel';
 
-import restaraunts from 'app/containers/map/stores';
+import restaurants from 'app/containers/map/stores';
 
 class Search extends PureComponent {
     state = {
-        activeRestaraunt: null,
+        activeRestaurant: null,
     };
 
-    setActiveRestaraunt = (activeRestaraunt) => this.setState({ activeRestaraunt });
+    setActiveRestaraunt = (activeRestaurant) => this.setState({ activeRestaurant });
 
     render() {
         const { classes } = this.props;
+        const { activeRestaurant } = this.state;
         return (
             <div className={classes.mapWrapper}>
-                <Map markers={restaraunts} setActiveMarker={this.setActiveRestaraunt} activeMarker={activeRestaraunt} />
+                <Map markers={restaurants} setActiveMarker={this.setActiveRestaraunt} activeMarker={activeRestaurant} />
                 <RestaurantsCarousel
-                    restaraunts={restaraunts}
-                    activeRestaraunt={activeRestaraunt}
+                    restaurants={restaurants}
+                    activeRestaurant={activeRestaurant}
                     setActiveRestaraunt={this.setActiveRestaraunt}
                 />
             </div>

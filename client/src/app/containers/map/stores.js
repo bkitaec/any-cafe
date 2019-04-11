@@ -291,4 +291,4 @@ export default [
             slug: 'loja',
         },
     },
-].map((rest, id) => ({ ...rest, id: id++ }));
+].map((rest, id) => ({ ...rest, id: id + 1 }));

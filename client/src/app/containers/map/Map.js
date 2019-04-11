@@ -7,6 +7,7 @@ import Pin from './icons/pin.png';
 import Cluster4 from './icons/cluster4.png';
 
 const GOOGLE_API_KEY = 'AIzaSyCl4Ji7FJ2Ms_1zuYqWJOubtxpBVIp9EQ4';
+const ACTIVE = '_active';
 
 class Map extends PureComponent {
     initiated = false;
@@ -14,36 +15,45 @@ class Map extends PureComponent {
     maps = null;
     bounds = null;
     clastersMap = null;
+    markers = [];
+
     state = {
         open: false,
     };
 
     initMap = () => {
-        const markers = this.props.markers.map((store) => this.addMarker(store));
-        this.clastersMap = new MarkerClusterer(this.map, markers, optionsCluster);
+        this.markers = this.props.markers.reduce((accum, markerInfo) => {
+            const marker = this.addMarker(markerInfo);
+            if (marker) {
+                accum[markerInfo.id] = marker;
+            }
+            return accum;
+        }, {});
+        const arrayOfMarkers = Object.values(this.markers);
+        this.clastersMap = new MarkerClusterer(this.map, arrayOfMarkers, optionsCluster);
         this.map.fitBounds(this.bounds);
-        return markers;
+        return arrayOfMarkers;
     };
 
-    addMarker = (markerinfo) => {
+    addMarker = (markerInfo) => {
         const {
             type,
             name: title,
             location: { country, state, city, district },
-        } = markerinfo;
+        } = markerInfo;
         const categories = [country.slug, state.slug, city.slug, district.slug, type.slug];
 
-        var position = new this.maps.LatLng(markerinfo.location.coordinates.lat, markerinfo.location.coordinates.lng);
+        var position = new this.maps.LatLng(markerInfo.location.coordinates.lat, markerInfo.location.coordinates.lng);
 
         const icons = {
             loja: Pin,
             ponto: Pin,
         };
 
-        var marker = new this.maps.Marker({
+        const marker = new this.maps.Marker({
             title: title || '', // titulo marcador
-            position: position, // posicao marcador
-            icon: icons[markerinfo.type.slug], // usa icone certo para cada tipo de marcador
+            position,
+            icon: icons[markerInfo.type.slug], // usa icone certo para cada tipo de marcador
             animation: this.maps.Animation.DROP, // animação drop marcador
             map: this.map, // registra marcador na variável map
             category: categories,
@@ -51,12 +61,15 @@ class Map extends PureComponent {
 
         this.bounds.extend(marker.position);
 
-        marker.addListener('click', (...e) => {
-            console.log('$$$ [e]', e, markerinfo);
-            this.props.setActiveMarker(markerInfo);
-            // this.setActiveRestaraunt
-            // this.map.setZoom(10);
-            // this.map.setCenter(marker.getPosition());
+        marker.addListener('click', (e) => {
+            // this.map.setZoom(13);
+            this.map.setCenter(marker.getPosition());
+            if (this.markers[ACTIVE] && this.markers[ACTIVE].getAnimation() != null) {
+                this.markers[ACTIVE].setAnimation(null);
+            }
+            marker.setAnimation(this.maps.Animation.BOUNCE);
+            this.markers[ACTIVE] = marker;
+            this.props.setActiveMarker && this.props.setActiveMarker(markerInfo);
         });
         marker.addListener('dblclick', () => {
             this.toggleBooking();
@@ -70,7 +83,7 @@ class Map extends PureComponent {
         if (!this.initiated) {
             this.initiated = true;
             this.bounds = new maps.LatLngBounds();
-            this.setState({ markers: this.initMap() });
+            this.initMap();
         }
     };
 
