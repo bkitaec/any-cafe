@@ -9,10 +9,6 @@ import Card from 'app/components/uikit/Card/Card.jsx';
 import CardBody from 'app/components/uikit/Card/CardBody.jsx';
 import CardFooter from 'app/components/uikit/Card/CardFooter.jsx';
 
-import image1 from 'app/assets/img/bg.jpg';
-import image2 from 'app/assets/img/bg2.jpg';
-import image3 from 'app/assets/img/bg3.jpg';
-
 import { cardTitle } from 'app/assets/jss/material-kit-react.jsx';
 import imagesStyle from 'app/assets/jss/material-kit-react/imagesStyles.jsx';
 import skewStyles from 'app/assets/jss/styles/skewStyles.jsx';
@@ -24,7 +20,7 @@ const RestaurantCard = ({ classes, restaurant }) => (
                 <img className={`${classes.skewChild} ${classes.image}`} src={restaurant.image} alt={restaurant.name} />
             </div>
             <h4 className={classes.cardTitle}>{restaurant.name}</h4>
-            <p>{restaurant.desc}</p>
+            <p>{restaurant.phone}</p>
         </CardBody>
         <CardFooter className={`${classes.cardFooter} ${classes.skewChild} ${classes.cardBody}`}>
             <div className={classes.flex}>
@@ -38,7 +34,7 @@ const RestaurantCard = ({ classes, restaurant }) => (
 
 class Carousel extends PureComponent {
     render() {
-        const { classes } = this.props;
+        const { classes, restaraunts } = this.props;
         const settings = {
             infinite: true,
             speed: 500,
@@ -56,11 +52,7 @@ class Carousel extends PureComponent {
         );
     }
 }
-const restaraunts = [
-    { name: 'Restaurant #1', image: image1, desc: 'Some description soon...' },
-    { name: 'Restaurant #2', image: image2, desc: 'Some description soon...' },
-    { name: 'Restaurant #3', image: image3, desc: 'Some description soon...' },
-];
+
 const styles = () => ({
     ...imagesStyle,
     ...skewStyles,

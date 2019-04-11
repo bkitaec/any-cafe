@@ -2,12 +2,8 @@ import React, { PureComponent } from 'react';
 import GoogleMapReact from 'google-map-react';
 import MarkerClusterer from '@google/markerclusterer';
 
-import stores from './stores.json';
 import mapStyles from './styles.json';
 import Pin from './icons/pin.png';
-// import Cluster1 from './icons/cluster1.png';
-// import Cluster2 from './icons/cluster2.png';
-// import Cluster3 from './icons/cluster3.png';
 import Cluster4 from './icons/cluster4.png';
 
 const GOOGLE_API_KEY = 'AIzaSyCl4Ji7FJ2Ms_1zuYqWJOubtxpBVIp9EQ4';
@@ -23,7 +19,7 @@ class Map extends PureComponent {
     };
 
     initMap = () => {
-        const markers = stores.map((store) => this.addMarker(store));
+        const markers = this.props.markers.map((store) => this.addMarker(store));
         this.clastersMap = new MarkerClusterer(this.map, markers, optionsCluster);
         this.map.fitBounds(this.bounds);
         return markers;
@@ -37,16 +33,13 @@ class Map extends PureComponent {
         } = markerinfo;
         const categories = [country.slug, state.slug, city.slug, district.slug, type.slug];
 
-        // posição lat e lng do marcador
         var position = new this.maps.LatLng(markerinfo.location.coordinates.lat, markerinfo.location.coordinates.lng);
 
-        // imagem marcadores personalizados para cada tipo de local
         const icons = {
             loja: Pin,
             ponto: Pin,
         };
 
-        // registro de marcadores
         var marker = new this.maps.Marker({
             title: title || '', // titulo marcador
             position: position, // posicao marcador
@@ -56,23 +49,18 @@ class Map extends PureComponent {
             category: categories,
         });
 
-        // limite adicionado com posição de cada marcador
         this.bounds.extend(marker.position);
 
-        marker.addListener('click', () => {
+        marker.addListener('click', (...e) => {
+            console.log('$$$ [e]', e, markerinfo);
+            this.props.setActiveMarker(markerInfo);
+            // this.setActiveRestaraunt
             // this.map.setZoom(10);
-            this.map.setCenter(marker.getPosition());
+            // this.map.setCenter(marker.getPosition());
         });
         marker.addListener('dblclick', () => {
             this.toggleBooking();
         });
-
-        // marker.addListener('mouseover', function() {
-        //     infowindow.open(map, marker);
-        // });
-        // marker.addListener('mouseout', function() {
-        //     infowindow.close();
-        // });
         return marker;
     };
 
