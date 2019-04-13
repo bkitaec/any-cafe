@@ -17,14 +17,16 @@ import Navbar from 'app/containers/template/Navbar';
 import CardHeader from 'app/components/Card/CardHeader.jsx';
 import { cardTitle } from 'app/assets/jss/material-kit-react.jsx';
 
-class LandingPage extends React.Component {
+class Main extends React.PureComponent {
     render() {
         const { classes, ...rest } = this.props;
         return (
             <div>
                 <Navbar />
                 <Parallax filter image={require('app/assets/img/landing-bg.jpg')}>
-                    <Map />
+                    <div style={{ height: '100vh', width: '100vh', flexGrow: 1, zIndex: 12 }}>
+                        <Map />
+                    </div>
                 </Parallax>
                 <div className={classNames(classes.main, classes.mainRaised)}>
                     <CardHeader className={classes.cardHeader} color="warning">
@@ -52,4 +54,4 @@ export default withStyles({
         margin: '0 auto',
         textAlign: 'center',
     },
-})(LandingPage);
+})(Main);
