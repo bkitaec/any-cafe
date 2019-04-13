@@ -37,11 +37,11 @@ class Header extends React.Component {
         const { classes, color, changeColorOnScroll } = this.props;
         const windowsScrollTop = window.pageYOffset;
         if (windowsScrollTop > changeColorOnScroll.height) {
-            document.body.getElementsByTagName('header')[0].classList.remove(classes[color]);
-            document.body.getElementsByTagName('header')[0].classList.add(classes[changeColorOnScroll.color]);
+            document.getElementsByClassName('kit-header')[0].classList.remove(classes[color]);
+            document.getElementsByClassName('kit-header')[0].classList.add(classes[changeColorOnScroll.color]);
         } else {
-            document.body.getElementsByTagName('header')[0].classList.add(classes[color]);
-            document.body.getElementsByTagName('header')[0].classList.remove(classes[changeColorOnScroll.color]);
+            document.getElementsByClassName('kit-header')[0].classList.add(classes[color]);
+            document.getElementsByClassName('kit-header')[0].classList.remove(classes[changeColorOnScroll.color]);
         }
     }
     componentWillUnmount() {
@@ -63,7 +63,7 @@ class Header extends React.Component {
             </Link>
         );
         return (
-            <AppBar className={appBarClasses}>
+            <AppBar className={`${appBarClasses} kit-header`}>
                 <Toolbar className={classes.container}>
                     {leftLinks !== undefined ? brandComponent : null}
                     <div className={classes.flex}>

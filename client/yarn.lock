@@ -888,6 +888,13 @@
   resolved "https://registry.yarnpkg.com/@date-io/core/-/core-1.1.0.tgz#b7b8fbd9b5e57cc6b55a5af2d98394eafdf42921"
   integrity sha512-PyjhyR2fbp7Q8xpB5zoOyT3dqr8Bn4kXfREf1w6AnQalwdftNxChB2/p88fI1qsx8KNmHDJY12eCgLoZaPegTw==
 
+"@date-io/dayjs@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@date-io/dayjs/-/dayjs-1.1.0.tgz#26947d4ad1b4c3cbc473bfb626f9e2a6609fe5d9"
+  integrity sha512-gbIrpyPXCqhq86eNO9PVt1wEkqo5vaKzbCCjnmbs/RsmaYNaZ3ee7g0Yv6T72qfAkfb9j3WXia0edSTQvQgbSQ==
+  dependencies:
+    "@date-io/core" "^1.1.0"
+
 "@date-io/moment@^1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@date-io/moment/-/moment-1.1.0.tgz#993c71b77f52f078de6a28e61ddfae757d39dc64"
@@ -3417,6 +3424,11 @@ date-now@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/date-now/-/date-now-0.1.4.tgz#eaf439fd4d4848ad74e5cc7dbef200672b9e345b"
   integrity sha1-6vQ5/U1ISK105cx9vvIAZyueNFs=
+
+dayjs@^1.8.12:
+  version "1.8.12"
+  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.8.12.tgz#f9610fb9b115aa2fe2a07e742c130df418cee76a"
+  integrity sha512-7keChCzzjU68sYJpk7kEI1Q9qbJyscyiW0STwEhqDFt+2js9pA/BSzmYE4PRxcMMoUMxNeY0TEMZHqV/JBR4OA==
 
 debounce@^1.1.0:
   version "1.2.0"
@@ -9304,6 +9316,14 @@ react-slick@^0.23.2:
     lodash.debounce "^4.0.8"
     prettier "^1.14.3"
     resize-observer-polyfill "^1.5.0"
+
+react-star-rating-component@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/react-star-rating-component/-/react-star-rating-component-1.4.1.tgz#74dc1c73493f088013331c234190b8cccad31f6b"
+  integrity sha512-i0YEvQzToS0s0GDkxn01Jy4EeLpVEyh023NXJTJ+/1+xkvhpACyD4d1YeBhYWZab53ppUnUxs5gmp75gJr3khA==
+  dependencies:
+    classnames "^2.2.5"
+    prop-types "^15.6.1"
 
 react-swipeable-views-core@^0.13.1:
   version "0.13.1"

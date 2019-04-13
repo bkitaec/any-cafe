@@ -8,6 +8,7 @@ import GridContainer from 'app/components/uikit/Grid/GridContainer.jsx';
 import Card from 'app/components/uikit/Card/Card.jsx';
 import CardBody from 'app/components/uikit/Card/CardBody.jsx';
 import CardFooter from 'app/components/uikit/Card/CardFooter.jsx';
+import { get } from 'utils/lo/lo';
 
 import { cardTitle } from 'app/assets/jss/material-kit-react.jsx';
 import imagesStyle from 'app/assets/jss/material-kit-react/imagesStyles.jsx';
@@ -39,17 +40,36 @@ const RestaurantCard = ({ classes, restaurant }) => (
 class Carousel extends PureComponent {
     sliderRef = React.createRef();
 
-    componentDidiUpdate(prevProps) {
-            const { }
+    componentDidUpdate(prevProps) {
+        const { activeRestaurant, restaurants } = this.props;
+        if (prevProps.activeRestaurant !== activeRestaurant) {
+            let i = 0,
+                index = -1;
+            while (i < restaurants.length || index === -1) {
+                if (get(activeRestaurant, 'id') === get(restaurants, `[${i}].id`)) {
+                    index = i;
+                }
+                i++;
+            }
+            this.sliderRef.current.slickGoTo(index);
+        }
     }
 
+    afterSlideChange = (activeIndex) => {
+        const { activeRestaurant, restaurants } = this.props;
+        if (get(activeRestaurant, 'id') !== restaurants[activeIndex]) {
+            this.props.setActiveRestaraunt(restaurants[activeIndex]);
+        }
+    };
+
     render() {
-        const { classes, restaurants, activeRestaurant } = this.props;
+        const { classes, restaurants } = this.props;
         const settings = {
             infinite: true,
             speed: 500,
             slidesToShow: 1,
             slidesToScroll: 1,
+            afterChange: this.afterSlideChange,
         };
         return (
             <SlickCarousel ref={this.sliderRef} className={classes.container} {...settings}>

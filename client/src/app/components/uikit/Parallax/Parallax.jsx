@@ -1,12 +1,8 @@
 import React from 'react';
-// nodejs library that concatenates classes
-import classNames from 'classnames';
-// nodejs library to set properties for components
 import PropTypes from 'prop-types';
-// @material-ui/core components
+
 import withStyles from '@material-ui/core/styles/withStyles';
 
-// core components
 import parallaxStyle from 'app/assets/jss/material-kit-react/components/parallaxStyle.jsx';
 
 class Parallax extends React.PureComponent {
@@ -35,22 +31,21 @@ class Parallax extends React.PureComponent {
         });
     }
     render() {
-        const { classes, filter, className, children, style, image, small } = this.props;
-        const parallaxClasses = classNames({
-            [classes.parallax]: true,
-            [classes.filter]: filter,
-            [classes.small]: small,
-            [className]: className !== undefined,
-        });
+        const { classes, filter, className, children, style, image, small, medium } = this.props;
         return (
             <div
-                className={parallaxClasses}
+                className={`
+                        ${classes.parallax}
+                        ${filter ? classes.filter : ''}
+                        ${medium ? classes.medium : ''}
+                        ${small ? classes.small : ''}
+                        ${className ? className : ''}
+                    `}
                 style={{
                     ...style,
                     backgroundImage: 'url(' + image + ')',
                     ...this.state,
                 }}
-                ref="parallax"
             >
                 {children}
             </div>

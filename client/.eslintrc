@@ -54,6 +54,7 @@
     "react/forbid-foreign-prop-types": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
-    "react/prop-types": 0    
+    "react/display-name": 0,   
+    "react/prop-types": 0
   }
 }
