@@ -9,7 +9,7 @@ const profilePageStyle = {
         '& img': {
             maxWidth: '160px',
             width: '100%',
-            margin: '0 auto',
+            margin: '0 0 0 20px',
             transform: 'translate3d(0, -50%, 0)',
         },
     },
