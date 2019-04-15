@@ -27,7 +27,7 @@ const Content = styled(Grid)`
 
 const Layout = ({ children }) => {
     return (
-        <Grid container alignItems="stretch" direction="column" wrap="nowrap">
+        <Grid container alignItems="stretch" direction="column" wrap="nowrap" justify="stretch">
             <Navbar />
             <Content container>{children}</Content>
         </Grid>

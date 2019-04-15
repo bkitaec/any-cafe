@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import withStyles from '@material-ui/core/styles/withStyles';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
-import Input from '@material-ui/core/Input';
+import TextField from '@material-ui/core/TextField';
 
 import customInputStyle from 'app/assets/jss/material-kit-react/components/customInputStyle.jsx';
 
@@ -44,7 +44,7 @@ function CustomInput({ ...props }) {
                     {labelText}
                 </InputLabel>
             ) : null}
-            <Input
+            <TextField
                 classes={{
                     input: inputClasses,
                     root: marginTop,

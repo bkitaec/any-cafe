@@ -1,83 +1,35 @@
 import React, { memo, useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import { Avatar, Button, CssBaseline, Checkbox, TextField, Paper, Typography, withStyles } from '@mic3/platform-ui';
+import { Avatar, Button, CssBaseline, TextField, Paper, Typography, withStyles } from '@mic3/platform-ui';
 import { connect } from 'react-redux';
 import validate from 'validate.js';
+import PhoneInput from 'react-phone-number-input';
 
 import Centered from 'app/components/molecules/wrappers/Centered';
+import constraintsConfig from 'app/config/validation';
 import { userSignUpAction } from 'store/actions/user';
 import { useOnPlainForm } from 'app/hooks/useOnForm';
+import { getValidationProps } from 'utils/form/validation';
 import { get } from 'utils/lo/lo';
 
-const styles = (theme) => ({
-    paper: {
-        maxWidth: '450px',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
-    },
-    avatar: {
-        margin: theme.spacing.unit,
-        backgroundColor: theme.palette.secondary.main,
-    },
-    form: {
-        width: '100%', // Fix IE 11 issue.
-        marginTop: theme.spacing.unit,
-    },
-    submit: {
-        marginTop: theme.spacing.unit * 3,
-    },
-});
+import 'react-phone-number-input/style.css';
+
 const initialForm = {
-    name: '',
-    email: '',
+    phone: '',
     password: '',
     rePassword: '',
-    remember: false,
-};
-const constraints = {
-    email: {
-        presence: true,
-        email: true,
-    },
-    password: {
-        presence: true,
-        length: {
-            minimum: 5,
-        },
-    },
-    rePassword: {
-        presence: true,
-        equality: {
-            attribute: 'password',
-            message: '^The passwords does not match',
-        },
-    },
-    name: {
-        presence: true,
-        length: {
-            minimum: 3,
-            maximum: 20,
-        },
-        format: {
-            pattern: '[a-z0-9]+',
-            flags: 'i',
-            message: 'can only contain a-z and 0-9',
-        },
-    },
-    remember: {},
 };
 
-const getValidationProps = (fieldName, validation) => ({
-    error: get(validation, `${fieldName}.length`),
-    helperText: get(validation, `${fieldName}.length`) > 0 ? get(validation, `${fieldName}[0]`, '') : '',
-});
+const constraints = {
+    phone: constraintsConfig.phone,
+    password: constraintsConfig.password,
+    rePassword: constraintsConfig.rePassword,
+};
 
 const SignUp = (props) => {
     const { classes, userSignUpAction } = props;
-    const [form, onChange] = useOnPlainForm(initialForm);
+    const [form, onChange, setForm] = useOnPlainForm(initialForm);
     const [validation, setValidation] = useState({});
     const onSubmit = useCallback(
         (event) => {
@@ -90,6 +42,13 @@ const SignUp = (props) => {
         },
         [form, userSignUpAction]
     );
+    const onChangePhone = useCallback(
+        (value) => {
+            setForm({ ...form, phone: value });
+        },
+        [form, setForm]
+    );
+
     return (
         <Centered>
             <CssBaseline />
@@ -101,27 +60,15 @@ const SignUp = (props) => {
                     Sign up
                 </Typography>
                 <form className={classes.form}>
-                    <TextField
-                        {...getValidationProps('name', validation)}
-                        onChange={onChange}
-                        value={form.name}
-                        label="Name"
-                        id="name"
-                        name="name"
-                        autoComplete="name"
-                        variant="standard"
-                        autoFocus
-                    />
-                    <TextField
-                        {...getValidationProps('email', validation)}
-                        onChange={onChange}
-                        value={form.email}
-                        id="email"
-                        label="Email Address"
-                        name="email"
-                        autoComplete="email"
-                        variant="standard"
-                        autoFocus
+                    <PhoneInput
+                        placeholder="Enter phone number"
+                        value={form.phone}
+                        onChange={onChangePhone}
+                        error={
+                            get(getValidationProps('phone', validation), 'error')
+                                ? get(getValidationProps('phone', validation), 'helperText')
+                                : undefined
+                        }
                     />
                     <TextField
                         {...getValidationProps('password', validation)}
@@ -145,7 +92,6 @@ const SignUp = (props) => {
                         autoComplete="re-new-password"
                         variant="standard"
                     />
-                    <Checkbox name="remember" value="remember" onChange={onChange} color="primary" label="Remember me" />
                     <Button onClick={onSubmit} type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
                         Sign up
                     </Button>
@@ -154,6 +100,27 @@ const SignUp = (props) => {
         </Centered>
     );
 };
+
+const styles = (theme) => ({
+    paper: {
+        maxWidth: '450px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
+    },
+    avatar: {
+        margin: theme.spacing.unit,
+        backgroundColor: theme.palette.secondary.main,
+    },
+    form: {
+        width: '100%', // Fix IE 11 issue.
+        marginTop: theme.spacing.unit,
+    },
+    submit: {
+        marginTop: theme.spacing.unit * 3,
+    },
+});
 
 SignUp.propTypes = {
     classes: PropTypes.object.isRequired,

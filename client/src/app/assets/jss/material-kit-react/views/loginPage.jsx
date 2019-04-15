@@ -5,7 +5,7 @@ const signupPageStyle = {
         ...container,
         zIndex: '2',
         position: 'relative',
-        paddingTop: '20vh',
+        paddingTop: '10vh',
         color: '#FFFFFF',
     },
     cardHidden: {
@@ -13,8 +13,8 @@ const signupPageStyle = {
         transform: 'translate3d(0, -60px, 0)',
     },
     pageHeader: {
-        minHeight: '100vh',
-        height: 'auto',
+        width: '100%',
+        height: '100%',
         display: 'inherit',
         position: 'relative',
         margin: '0',
