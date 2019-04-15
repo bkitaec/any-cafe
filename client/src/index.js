@@ -5,6 +5,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 import 'app/assets/scss/material-kit-react.scss?v=1.4.0';
+import './i18n';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

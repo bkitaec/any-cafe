@@ -10,11 +10,11 @@ import CardBody from 'app/components/uikit/Card/CardBody.jsx';
 import CardFooter from 'app/components/uikit/Card/CardFooter.jsx';
 import CardHeader from 'app/components/uikit/Card/CardHeader.jsx';
 import CustomInput from 'app/components/uikit/CustomInput/CustomInput.jsx';
-import Footer from 'app/components/uikit/Footer/Footer.jsx';
 import GridContainer from 'app/components/uikit/Grid/GridContainer.jsx';
 import GridItem from 'app/components/uikit/Grid/GridItem.jsx';
-import image from 'app/assets/img/bg7.jpg';
 import loginPageStyle from 'app/assets/jss/material-kit-react/views/loginPage.jsx';
+
+import AuthBack from 'app/assets/img/auth.back.jpg';
 
 import 'react-phone-number-input/style.css';
 
@@ -43,13 +43,13 @@ class LoginPage extends React.Component {
     onChangePass = (event) => this.setState({ form: { password: event.target.value } });
 
     render() {
-        const { classes, ...rest } = this.props;
+        const { classes } = this.props;
         const { form } = this.state;
         return (
             <div
                 className={classes.pageHeader}
                 style={{
-                    backgroundImage: 'url(' + image + ')',
+                    backgroundImage: 'url(' + AuthBack + ')',
                     backgroundSize: 'cover',
                     backgroundPosition: 'top center',
                 }}
@@ -122,7 +122,6 @@ class LoginPage extends React.Component {
                         </GridItem>
                     </GridContainer>
                 </div>
-                <Footer whiteFont />
             </div>
         );
     }

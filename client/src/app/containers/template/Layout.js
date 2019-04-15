@@ -4,6 +4,7 @@ import { Grid } from '@mic3/platform-ui';
 import styled from 'styled-components';
 
 import Navbar from './Navbar';
+import Footer from './Footer';
 
 const Content = styled(Grid)`
     overflow-x: hidden;
@@ -30,6 +31,7 @@ const Layout = ({ children }) => {
         <Grid container alignItems="stretch" direction="column" wrap="nowrap" justify="stretch">
             <Navbar />
             <Content container>{children}</Content>
+            <Footer />
         </Grid>
     );
 };

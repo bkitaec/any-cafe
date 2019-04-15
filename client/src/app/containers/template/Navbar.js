@@ -1,11 +1,13 @@
 import React, { memo, useCallback, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import styled from 'styled-components';
-
+import ToggleButton from '@material-ui/lab/ToggleButton';
+import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import { Drawer, Typography, withStyles, AppBar, Toolbar, IconButton, InputBase, MenuItem, Menu } from '@mic3/platform-ui';
 
 import Link from 'app/components/atoms/Link';
@@ -21,6 +23,16 @@ const LogoStyled = styled.img`
 const Navbar = ({ classes }) => {
     const [anchorEl, handleProfileMenuOpen, handleProfielMenuClose] = useMenu();
     const [mobileAnchorEl, handleMobileMenuOpen, handleMobileMenuClose] = useMenu();
+
+    const { t, i18n } = useTranslation('app');
+    const [currentI18n, setCurrentI18n] = useState('en');
+    const changeLanguage = useCallback(
+        (event, lng) => {
+            i18n.changeLanguage(lng);
+            setCurrentI18n(lng);
+        },
+        [i18n]
+    );
 
     const [isOpenDrawer, setDrawer] = useState(false);
     const toggleDrawer = useCallback(() => {
@@ -38,10 +50,10 @@ const Navbar = ({ classes }) => {
     const isLogin = false;
     const menuItems = [
         <Button key={2} variant="text" color="primary" to="/about">
-            About
+            {t('navbar.about')}
         </Button>,
         <Button key={1} variant="text" color="primary" to="/signin">
-            Sign in/up
+            {t('navbar.login')}
         </Button>,
         isLogin && (
             <IconButton
@@ -80,7 +92,6 @@ const Navbar = ({ classes }) => {
             {useMemo(() => menuItems.map((item, index) => <MenuItem key={index}>{item}</MenuItem>), [menuItems])}
         </Menu>
     );
-
     return (
         <div className={classes.root}>
             <AppBar color="default" position="static">
@@ -112,7 +123,23 @@ const Navbar = ({ classes }) => {
             </AppBar>
             <Drawer open={isOpenDrawer} onClose={toggleDrawer}>
                 <LogoStyled src={Logo} alt="Anycafe" />
-                {useMemo(() => menuItems.map((item, index) => <MenuItem key={index}>{item}</MenuItem>), [menuItems])}
+                {useMemo(
+                    () => [
+                        ...menuItems.map((item, index) => <MenuItem key={index}>{item}</MenuItem>),
+                        <ToggleButtonGroup key={991} value={currentI18n} exclusive onChange={changeLanguage}>
+                            <ToggleButton value="en">
+                                <Typography>EN</Typography>
+                            </ToggleButton>
+                            <ToggleButton value="ru">
+                                <Typography>RU</Typography>
+                            </ToggleButton>
+                            <ToggleButton value="ua">
+                                <Typography>UA</Typography>
+                            </ToggleButton>
+                        </ToggleButtonGroup>,
+                    ],
+                    [changeLanguage, currentI18n, menuItems]
+                )}
             </Drawer>
             {renderProfileMenu}
             {renderMobileMenu}

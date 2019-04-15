@@ -8,7 +8,6 @@ import Header from 'app/components/Header/Header.jsx';
 import Button from 'app/components/CustomButtons/Button.jsx';
 import Logo from 'logo1.png';
 import navbarsStyle from 'app/assets/jss/material-kit-react/views/componentsSections/navbarsStyle.jsx';
-console.log('$$$ [navbarsStyle]', navbarsStyle);
 const dashboardRoutes = [];
 
 class SectionNavbars extends React.Component {
@@ -26,7 +25,13 @@ class SectionNavbars extends React.Component {
                             </Button>
                         </ListItem>
                         <ListItem className={classes.listItem}>
-                            <Button size="sm" href="#pablo" className={classes.navLink} onClick={(e) => e.preventDefault()} color="transparent">
+                            <Button
+                                size="sm"
+                                href="#pablo"
+                                className={classes.navLink}
+                                onClick={(e) => e.preventDefault()}
+                                color="transparent"
+                            >
                                 Wishlist
                             </Button>
                         </ListItem>

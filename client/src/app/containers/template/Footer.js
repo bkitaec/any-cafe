@@ -24,18 +24,8 @@ function Footer({ ...props }) {
                 <div className={classes.left}>
                     <List className={classes.list}>
                         <ListItem className={classes.inlineBlock}>
-                            <a href="https://www.creative-tim.com/" className={classes.block} target="_blank"> {/* eslint-disable-line */}
-                                Creative Tim
-                            </a>
-                        </ListItem>
-                        <ListItem className={classes.inlineBlock}>
                             <a href="https://www.creative-tim.com/presentation" className={classes.block} target="_blank"> {/* eslint-disable-line */}
                                 About us
-                            </a>
-                        </ListItem>
-                        <ListItem className={classes.inlineBlock}>
-                            <a href="http://blog.creative-tim.com/" className={classes.block} target="_blank"> {/* eslint-disable-line */}
-                                Blog
                             </a>
                         </ListItem>
                         <ListItem className={classes.inlineBlock}>
@@ -47,10 +37,10 @@ function Footer({ ...props }) {
                 </div>
                 <div className={classes.right}>
                     &copy; {1900 + new Date().getYear()} , made with <Favorite className={classes.icon} /> by{' '}
-                    <a href="https://www.creative-tim.com" className={aClasses} target="_blank"> {/* eslint-disable-line */}
-                        Creative Tim
+                    <a href="https://www.anycafe.today" className={aClasses} target="_blank"> {/* eslint-disable-line */}
+                        Anycafe
                     </a>{' '}
-                    for a better web.
+                    made with LOVE.
                 </div>
             </div>
         </footer>
