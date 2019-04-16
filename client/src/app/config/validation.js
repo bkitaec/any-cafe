@@ -1,7 +1,7 @@
 export const phone = {
     presence: true,
     format: {
-        pattern: `^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$`,
+        pattern: `^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$`, // eslint-disable-line
         flags: 'im',
         message: 'is invalid',
     },

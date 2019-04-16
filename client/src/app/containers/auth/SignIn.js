@@ -1,22 +1,18 @@
-import Icon from '@material-ui/core/Icon';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import PhoneInput from 'react-phone-number-input';
+import MuiPhoneInput from 'material-ui-phone-number';
 import React from 'react';
-import withStyles from '@material-ui/core/styles/withStyles';
+import { Button, IconButton, TextField, MdiIcon, withStyles, InputAdornment, Typography } from '@mic3/platform-ui';
+import { withTranslation } from 'react-i18next';
 
-import Button from 'app/components/uikit/CustomButtons/Button.jsx';
+// import Button from 'app/components/uikit/CustomButtons/Button.jsx';
 import Card from 'app/components/uikit/Card/Card.jsx';
 import CardBody from 'app/components/uikit/Card/CardBody.jsx';
 import CardFooter from 'app/components/uikit/Card/CardFooter.jsx';
 import CardHeader from 'app/components/uikit/Card/CardHeader.jsx';
-import CustomInput from 'app/components/uikit/CustomInput/CustomInput.jsx';
 import GridContainer from 'app/components/uikit/Grid/GridContainer.jsx';
 import GridItem from 'app/components/uikit/Grid/GridItem.jsx';
 import loginPageStyle from 'app/assets/jss/material-kit-react/views/loginPage.jsx';
 
 import AuthBack from 'app/assets/img/auth.back.jpg';
-
-import 'react-phone-number-input/style.css';
 
 class LoginPage extends React.Component {
     constructor(props) {
@@ -24,6 +20,7 @@ class LoginPage extends React.Component {
         // we use this to make the card to appear after the page has been rendered
         this.state = {
             cardAnimaton: 'cardHidden',
+            showPassword: false,
             form: {
                 phone: '',
                 password: '',
@@ -41,10 +38,11 @@ class LoginPage extends React.Component {
     }
     onChangePhone = (value) => this.setState({ form: { phone: value } });
     onChangePass = (event) => this.setState({ form: { password: event.target.value } });
+    toggleShowPassword = () => this.setState({ showPassword: !this.state.showPassword });
 
     render() {
-        const { classes } = this.props;
-        const { form } = this.state;
+        const { classes, t } = this.props;
+        const { form, showPassword } = this.state;
         return (
             <div
                 className={classes.pageHeader}
@@ -60,61 +58,58 @@ class LoginPage extends React.Component {
                             <Card className={classes[this.state.cardAnimaton]}>
                                 <form className={classes.form}>
                                     <CardHeader color="primary" className={classes.cardHeader}>
-                                        <h4>Login</h4>
+                                        <Typography className={classes.textColor} variant="h5">
+                                            {t('loginTitle')}
+                                        </Typography>
                                         <div className={classes.socialLine}>
-                                            <Button
-                                                justIcon
-                                                href="#pablo"
-                                                target="_blank"
-                                                color="transparent"
-                                                onClick={(e) => e.preventDefault()}
-                                            >
-                                                <i className={'fab fa-twitter'} />
-                                            </Button>
-                                            <Button
-                                                justIcon
-                                                href="#pablo"
-                                                target="_blank"
-                                                color="transparent"
-                                                onClick={(e) => e.preventDefault()}
-                                            >
-                                                <i className={'fab fa-facebook'} />
-                                            </Button>
-                                            <Button
-                                                justIcon
-                                                href="#pablo"
-                                                target="_blank"
-                                                color="transparent"
-                                                onClick={(e) => e.preventDefault()}
-                                            >
-                                                <i className={'fab fa-google-plus-g'} />
-                                            </Button>
+                                            <IconButton fontSize={40} className={classes.textColor} onClick={(e) => e.preventDefault()}>
+                                                <MdiIcon name="facebook-box" size={40} />
+                                            </IconButton>
+                                            <IconButton className={classes.textColor} onClick={(e) => e.preventDefault()}>
+                                                <MdiIcon name="google-plus" size={40} />
+                                            </IconButton>
                                         </div>
                                     </CardHeader>
-                                    <p className={classes.divider}>Or Be Classical</p>
+                                    <p className={classes.divider}>{t('orBeClassical')}</p>
                                     <CardBody>
-                                        <PhoneInput placeholder="Enter phone number" value={form.phone} onChange={this.onChangePhone} />
-                                        <CustomInput
-                                            name="password"
-                                            labelText="Enter password"
-                                            id="pass"
+                                        <MuiPhoneInput
+                                            key={9}
+                                            label={t('form.phone')}
+                                            value={form.phone}
+                                            defaultCountry="ua"
+                                            onChange={this.onChangePhone}
+                                        />
+                                        <TextField
+                                            key={8}
                                             onChange={this.onChangePass}
-                                            formControlProps={{
-                                                fullWidth: true,
-                                            }}
-                                            inputProps={{
-                                                type: 'password',
-                                                endAdornment: (
-                                                    <InputAdornment position="end">
-                                                        <Icon className={classes.inputIconsColor} />
+                                            value={form.password}
+                                            name="password"
+                                            type={showPassword ? 'text' : 'password'}
+                                            label={t('form.password')}
+                                            id="password"
+                                            autoComplete="new-password"
+                                            variant="standard"
+                                            InputProps={{
+                                                startAdornment: (
+                                                    <InputAdornment position="start">
+                                                        <IconButton
+                                                            aria-label="Toggle password visibility"
+                                                            onClick={this.toggleShowPassword}
+                                                        >
+                                                            {showPassword ? (
+                                                                <MdiIcon size={20} name="eye" />
+                                                            ) : (
+                                                                <MdiIcon size={20} name="eye-off" />
+                                                            )}
+                                                        </IconButton>
                                                     </InputAdornment>
                                                 ),
                                             }}
                                         />
                                     </CardBody>
                                     <CardFooter className={classes.cardFooter}>
-                                        <Button simple color="primary" size="lg">
-                                            Get started
+                                        <Button color="default" size="lg">
+                                            {t('form.submitLoginButton')}
                                         </Button>
                                     </CardFooter>
                                 </form>
@@ -127,4 +122,4 @@ class LoginPage extends React.Component {
     }
 }
 
-export default withStyles(loginPageStyle)(LoginPage);
+export default withStyles(loginPageStyle)(withTranslation('auth')(LoginPage));
