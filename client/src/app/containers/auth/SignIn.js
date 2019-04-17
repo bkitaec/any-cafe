@@ -1,9 +1,10 @@
 import MuiPhoneInput from 'material-ui-phone-number';
 import React from 'react';
-import { Button, IconButton, TextField, MdiIcon, withStyles, InputAdornment, Typography } from '@mic3/platform-ui';
+import { withStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import { Button, IconButton, MdiIcon, InputAdornment, Typography } from '@mic3/platform-ui';
 import { withTranslation } from 'react-i18next';
 
-// import Button from 'app/components/uikit/CustomButtons/Button.jsx';
 import Card from 'app/components/uikit/Card/Card.jsx';
 import CardBody from 'app/components/uikit/Card/CardBody.jsx';
 import CardFooter from 'app/components/uikit/Card/CardFooter.jsx';
@@ -49,7 +50,7 @@ class LoginPage extends React.Component {
                 style={{
                     backgroundImage: 'url(' + AuthBack + ')',
                     backgroundSize: 'cover',
-                    backgroundPosition: 'top center',
+                    backgroundPosition: 'center center',
                 }}
             >
                 <div className={classes.container}>
@@ -81,6 +82,7 @@ class LoginPage extends React.Component {
                                         />
                                         <TextField
                                             key={8}
+                                            margin="normal"
                                             onChange={this.onChangePass}
                                             value={form.password}
                                             name="password"

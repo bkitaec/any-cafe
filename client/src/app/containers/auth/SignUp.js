@@ -1,6 +1,8 @@
 import React, { memo, useCallback, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { IconButton, MdiIcon, Button, TextField, Typography, withStyles, InputAdornment } from '@mic3/platform-ui';
+import { withStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import { IconButton, MdiIcon, Button, Typography, InputAdornment } from '@mic3/platform-ui';
 import { connect } from 'react-redux';
 import validate from 'validate.js';
 import MuiPhoneInput from 'material-ui-phone-number';
@@ -21,8 +23,6 @@ import useMenu from 'app/hooks/useMenu';
 import loginPageStyle from 'app/assets/jss/material-kit-react/views/loginPage.jsx';
 
 import AuthBack from 'app/assets/img/auth.back.jpg';
-
-import 'react-phone-number-input/style.css';
 
 const initialForm = {
     phone: '',
@@ -105,15 +105,26 @@ const SignUp = (props) => {
                                     />
                                     <TextField
                                         {...getValidationProps('email', validation)}
+                                        margin="normal"
                                         onChange={onChange}
                                         value={form.password}
                                         name="email"
                                         type="email"
                                         label={t('form.email')}
                                         variant="standard"
+                                        InputProps={{
+                                            startAdornment: (
+                                                <InputAdornment position="start">
+                                                    <IconButton aria-label="Email">
+                                                        <MdiIcon size={20} name="at" />
+                                                    </IconButton>
+                                                </InputAdornment>
+                                            ),
+                                        }}
                                     />
                                     <TextField
                                         {...getValidationProps('password', validation)}
+                                        margin="normal"
                                         onChange={onChange}
                                         value={form.password}
                                         name="password"

@@ -1,8 +1,8 @@
 import React, { Suspense } from 'react';
 import PropTypes from 'prop-types';
 import { Router, Route } from 'react-router-dom';
-import { MuiThemeProvider, MuiPickersUtilsProvider } from '@mic3/platform-ui';
-import { Paper, withStyles, createMuiTheme } from '@mic3/platform-ui';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { MuiPickersUtilsProvider, Paper, withStyles } from '@mic3/platform-ui';
 import { ApolloProvider } from 'react-apollo';
 import { Provider } from 'react-redux';
 import DayJsUtils from '@date-io/dayjs';
@@ -14,6 +14,7 @@ import { client } from 'graphql/client';
 import Logo from 'app/assets/img/logomini.png';
 
 const theme = createMuiTheme({
+    typography: { useNextVariants: true },
     palette: {
         primary: {
             light: '#e6ff8a',
@@ -48,9 +49,9 @@ const Loader = () => (
 );
 
 const App = ({ classes }) => (
-    <Suspense fallback={<Loader />}>
-        <MuiThemeProvider theme={theme}>
-            <MuiPickersUtilsProvider utils={DayJsUtils}>
+    <MuiThemeProvider theme={theme}>
+        <MuiPickersUtilsProvider utils={DayJsUtils}>
+            <Suspense fallback={<Loader />}>
                 <Paper className={classes.root}>
                     <ApolloProvider client={client}>
                         <Provider store={store}>
@@ -60,9 +61,9 @@ const App = ({ classes }) => (
                         </Provider>
                     </ApolloProvider>
                 </Paper>
-            </MuiPickersUtilsProvider>
-        </MuiThemeProvider>
-    </Suspense>
+            </Suspense>
+        </MuiPickersUtilsProvider>
+    </MuiThemeProvider>
 );
 
 App.propTypes = {

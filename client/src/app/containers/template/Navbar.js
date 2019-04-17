@@ -8,7 +8,8 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import styled from 'styled-components';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
-import { Drawer, Typography, withStyles, AppBar, Toolbar, IconButton, InputBase, MenuItem, Menu } from '@mic3/platform-ui';
+import { withStyles } from '@material-ui/core/styles';
+import { Drawer, Typography, AppBar, Toolbar, IconButton, InputBase, MenuItem, Menu } from '@mic3/platform-ui';
 
 import Link from 'app/components/atoms/Link';
 import Button from 'app/components/atoms/Button';

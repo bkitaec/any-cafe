@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 
-import { withStyles, List, ListItem, Tooltip } from '@mic3/platform-ui';
+import { withStyles } from '@material-ui/core/styles';
+import { List, ListItem, Tooltip } from '@mic3/platform-ui';
 
 import Button from 'app/components/uikit/CustomButtons/Button.jsx';
 
