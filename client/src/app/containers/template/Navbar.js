@@ -50,11 +50,14 @@ const Navbar = ({ classes }) => {
 
     const isLogin = false;
     const menuItems = [
-        <Button key={2} variant="text" color="primary" to="/about">
+        <Button key={0} variant="text" color="primary" to="/about">
             {t('navbar.about')}
         </Button>,
-        <Button key={1} variant="text" color="primary" to="/signin">
+        <Button key={2} variant="text" color="primary" to="/signin">
             {t('navbar.login')}
+        </Button>,
+        <Button key={3} variant="text" color="primary" to="/signup">
+            {t('navbar.registration')}
         </Button>,
         isLogin && (
             <IconButton

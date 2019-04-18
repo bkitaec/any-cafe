@@ -14,6 +14,12 @@ export class User extends Model<User> {
   @Column
   name: string;
 
+  @Column
+  avatar: string;
+
+  @Column({unique: true})
+  phone: string;
+
   @Column({unique: true})
   email: string;
 
@@ -30,7 +36,7 @@ export class User extends Model<User> {
   token: string;
   login: boolean;
 
-  @Column
+  @Column({unique: true})
   socialNetwork: string;
 
 

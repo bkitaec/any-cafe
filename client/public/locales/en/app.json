@@ -2,6 +2,7 @@
     "commingSoon": "comming soon...",
     "navbar": {
         "about": "About",
-        "login": "Login"
+        "login": "Login",
+        "registration": "Registration"
     }
 }

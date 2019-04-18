@@ -14,8 +14,8 @@ export const Query = {
         }
     }),
     loginUser: resolver(User, {
-        before: async (findOptions, { email }) => {
-            findOptions.where = {email};
+        before: async (findOptions, { phone }) => {
+            findOptions.where = {phone};
             return findOptions;
         },
         after: async (user, { password }) => {
