@@ -3,7 +3,6 @@ import { withStyles, Typography, DateTimePicker, MdiIcon, Button } from '@mic3/p
 import StarRatingComponent from 'react-star-rating-component';
 
 import Header from 'app/components/uikit/Header/Header.jsx';
-import Footer from 'app/components/uikit/Footer/Footer.jsx';
 import GridContainer from 'app/components/uikit/Grid/GridContainer.jsx';
 import GridItem from 'app/components/uikit/Grid/GridItem.jsx';
 import HeaderLinks from 'app/containers/restaurant/HeaderLinks.js';
@@ -80,7 +79,6 @@ class ProfilePage extends React.Component {
                         </div>
                     </div>
                 </div>
-                <Footer />
             </div>
         );
     }
